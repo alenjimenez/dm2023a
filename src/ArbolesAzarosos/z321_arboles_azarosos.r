@@ -1,3 +1,4 @@
+
 #Ensemble de arboles de decision
 #utilizando el naif metodo de Arboles Azarosos
 #entreno cada arbol utilizando un subconjunto distinto de atributos del dataset
@@ -21,12 +22,12 @@ require("rpart")
 
 PARAM <- list()
 PARAM$experimento  <- 3210
-PARAM$semilla  <- 102191      #Establezco la semilla aleatoria, cambiar por SU primer semilla
+PARAM$semilla  <- 100043      #Establezco la semilla aleatoria, cambiar por SU primer semilla
 
 #parameetros rpart
 PARAM$rpart_param   <- list( "cp"=          -1,
-                              "minsplit"=  300,
-                              "minbucket"=  20,
+                              "minsplit"=  1000,
+                              "minbucket"=  200,
                               "maxdepth"=   10 )
 
 #parametros  arbol
@@ -36,9 +37,12 @@ PARAM$num_trees_max  <- 500 #voy a generar 500 arboles, a mas arboles mas tiempo
 # FIN parametros experimento
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
+
+start_time <- Sys.time()
+
 #Aqui comienza el programa
 
-setwd("X:\\gdrive\\itba2023a\\")  #Establezco el Working Directory
+setwd("C:/Users/alenj/OneDrive/Escritorio/data_mining")  #Establezco el Working Directory
 
 #cargo los datos
 dataset  <- fread("./datasets/dataset_pequeno.csv")
@@ -51,7 +55,6 @@ dir.create( paste0( "./exp/KA", PARAM$experimento, "/"),
             showWarnings = FALSE )
 
 setwd( carpeta_experimento )
-
 
 #que tamanos de ensemble grabo a disco, pero siempre debo generar los 500
 grabar  <- c( 1, 5, 10, 50, 100, 200, 500)
@@ -115,3 +118,9 @@ for( arbolito in  1:PARAM$num_trees_max )
 
   cat( arbolito, "\n" )  #imprimo cada pasada para no angustiarme
 }
+
+end_time <- Sys.time()
+
+execution_time <- end_time - start_time
+
+print(paste("Script execution time:", execution_time))

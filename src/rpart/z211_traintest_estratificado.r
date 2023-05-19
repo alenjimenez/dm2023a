@@ -29,7 +29,7 @@ particionar  <- function( data,  division, agrupa="",  campo="fold", start=1, se
 #------------------------------------------------------------------------------
 
 #Aqui se debe poner la carpeta de la computadora local
-setwd("X:\\gdrive\\ITBA2023a\\")  #Establezco el Working Directory
+setwd("C:/Users/alenj/OneDrive/Escritorio/data_mining")  #Establezco el Working Directory
 
 #cargo los datos
 dataset  <- fread("./datasets/dataset_pequeno.csv")
@@ -39,8 +39,8 @@ dataset  <- dataset[ clase_ternaria!= "" ]
 
 #particiono estratificadamente el dataset
 #Cambiar por la primer semilla de cada uno !
-particionar( dataset, division=c(7,3), agrupa="clase_ternaria", seed= 102191 )  #Cambiar por la primer semilla de cada uno !
-
+particionar( dataset, division=c(7,3), agrupa="clase_ternaria", seed= 100043 )  #Cambiar por la primer semilla de cada uno !
+#100043, 100049, 100057, 209597, 264599, 319993
 
 param_basicos  <- list( "cp"=         -1,  #complejidad minima
                         "minsplit"=  400,  #minima cantidad de registros en un nodo para hacer el split
@@ -50,7 +50,7 @@ param_basicos  <- list( "cp"=         -1,  #complejidad minima
 #genero el modelo
 modelo  <- rpart("clase_ternaria ~ .",     #quiero predecir clase_ternaria a partir del resto
                  data= dataset[ fold==1],  #fold==1  es training,  el 70% de los datos
-                 xval= 0,
+                 xval= 0,                  # representa el numero de validaciones cruzadas
                  control=  param_basicos )  #aqui van los parametros
 
 

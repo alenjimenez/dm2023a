@@ -1,3 +1,4 @@
+
 rm( list=ls() )  #Borro todos los objetos
 gc()   #Garbage Collection
 
@@ -5,8 +6,14 @@ require("data.table")
 require("rpart")
 require("parallel")
 
-ksemillas  <- c(102191, 200177, 410551, 552581, 892237 ) #reemplazar por las propias semillas
+ksemillas  <- c(100043, 100049, 100057, 264599, 319993) #reemplazar por las propias semillas
+'
 
+ksemillas  <- c(100043, 100049, 100057, 264599, 319993
+                , 100151, 137197, 174271, 211379, 248531
+                , 285707, 322909, 360149, 397423, 434723
+                , 471991, 509203, 546461, 583751, 621037) #reemplazar por las propias semillas
+'
 #------------------------------------------------------------------------------
 #particionar agrega una columna llamada fold a un dataset que consiste en una particion estratificada segun agrupa
 # particionar( data=dataset, division=c(70,30), agrupa=clase_ternaria, seed=semilla)   crea una particion 70, 30 
@@ -61,7 +68,7 @@ ArbolEstimarGanancia  <- function( semilla, param_basicos )
 #------------------------------------------------------------------------------
 
 #Aqui se debe poner la carpeta de la computadora local
-setwd("X:\\gdrive\\ITBA2023a\\")  #Establezco el Working Directory
+setwd("C:/Users/alenj/OneDrive/Escritorio/data_mining")  #Establezco el Working Directory
 #cargo los datos
 
 #cargo los datos

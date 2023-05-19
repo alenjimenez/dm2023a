@@ -15,7 +15,7 @@ require("data.table")
 require("rpart")
 require("parallel")
 
-ksemillas  <- c(102191, 200177, 410551, 552581, 892237) #reemplazar por las propias semillas
+ksemillas  <- c(100043, 100049, 100057, 264599, 319993) #reemplazar por las propias semillas
 
 #------------------------------------------------------------------------------
 #particionar agrega una columna llamada fold a un dataset que consiste en una particion estratificada segun agrupa
@@ -82,7 +82,7 @@ ArbolesMontecarlo  <- function( semillas, param_basicos )
 #------------------------------------------------------------------------------
 
 #Aqui se debe poner la carpeta de la computadora local
-setwd("X:\\gdrive\\ITBA2023a\\")  #Establezco el Working Directory
+setwd("C:/Users/alenj/OneDrive/Escritorio/data_mining")  #Establezco el Working Directory
 #cargo los datos
 
 #cargo los datos
@@ -111,15 +111,19 @@ cat( file=archivo_salida,
 #itero por los loops anidados para cada hiperparametro
 #Aqui usted debera agregar loops !
 
-for( vmax_depth  in  c( 4, 6, 8, 10, 12, 14 )  )
+for( vcp in c( -1, 0, 1 ) )
+{
+for( vmax_depth  in  c( 1, 3, 5, 9, 15)  )
 {
 for( vmin_split  in  c( 1000, 800, 600, 400, 200, 100, 50, 20, 10 )  )
 {
+for( vmin_bucket in c(2, 4, 8, 16, 32, vmin_split/4 ) )
+{
 
   #notar como se agrega
-  param_basicos  <- list( "cp"=         -0.5,       #complejidad minima
+  param_basicos  <- list( "cp"=         vcp,       #complejidad minima
                           "minsplit"=  vmin_split,  #minima cantidad de registros en un nodo para hacer el split
-                          "minbucket"=  5,          #minima cantidad de registros en una hoja
+                          "minbucket"=  vmin_bucket,          #minima cantidad de registros en una hoja
                           "maxdepth"=  vmax_depth ) #profundidad máxima del arbol
 
   #Un solo llamado, con la semilla 17
@@ -133,5 +137,7 @@ for( vmin_split  in  c( 1000, 800, 600, 400, 200, 100, 50, 20, 10 )  )
         vmin_split, "\t",
         ganancia_promedio, "\n"  )
 
+}
+}
 }
 }
