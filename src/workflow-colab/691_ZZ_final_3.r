@@ -31,7 +31,7 @@ require("lightgbm")
 
 #Parametros del script
 PARAM  <- list()
-PARAM$experimento  <- "ZZ6910"
+PARAM$experimento  <- "ZZ6910_3"
 PARAM$exp_input  <- "HT6510_3"
 
 #Atencion, que cada modelos se procesa con 5 semillas, ajuste a SUS necesidades
