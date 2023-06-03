@@ -24,11 +24,11 @@ require("lightgbm")
 PARAM  <- list()
 PARAM$experimento <- "FE7310"
 
-PARAM$exp_input  <- "DR7210"
+PARAM$exp_input  <- "DR7210_1"
 
 PARAM$lag1  <- TRUE
 PARAM$lag2  <- TRUE
-PARAM$lag3  <- FALSE
+PARAM$lag3  <- TRUE
 
 PARAM$Tendencias1$run  <- TRUE
 PARAM$Tendencias1$ventana  <- 6
@@ -39,8 +39,8 @@ PARAM$Tendencias1$promedio  <- FALSE
 PARAM$Tendencias1$ratioavg  <- FALSE
 PARAM$Tendencias1$ratiomax  <- FALSE
 
-PARAM$Tendencias2$run  <- FALSE
-PARAM$Tendencias2$ventana  <- 6
+PARAM$Tendencias2$run  <- TRUE
+PARAM$Tendencias2$ventana  <- 3
 PARAM$Tendencias2$tendencia  <- TRUE
 PARAM$Tendencias2$minimo  <- FALSE
 PARAM$Tendencias2$maximo  <- FALSE
@@ -50,15 +50,15 @@ PARAM$Tendencias2$ratiomax  <- FALSE
 
 
 PARAM$RandomForest$run  <- TRUE
-PARAM$RandomForest$num.trees  <- 20
-PARAM$RandomForest$max.depth  <-  4
-PARAM$RandomForest$min.node.size  <- 1000
-PARAM$RandomForest$mtry  <- 40
-PARAM$RandomForest$semilla  <- 102191    # cambiar por la propia semilla
+PARAM$RandomForest$num.trees  <- 25
+PARAM$RandomForest$max.depth  <-  8
+PARAM$RandomForest$min.node.size  <- 750
+PARAM$RandomForest$mtry  <- 10
+PARAM$RandomForest$semilla  <- 100043    # cambiar por la propia semilla
 
-PARAM$CanaritosAsesinos$ratio  <- 0.0        #varia de 0.0 a 2.0, si es 0.0 NO se activan
+PARAM$CanaritosAsesinos$ratio  <- 1.5        #varia de 0.0 a 2.0, si es 0.0 NO se activan
 PARAM$CanaritosAsesinos$desvios  <- 4.0      #desvios estandar de la media, para el cutoff
-PARAM$CanaritosAsesinos$semilla  <- 200177   # cambiar por la propia semilla
+PARAM$CanaritosAsesinos$semilla  <- 100043   # cambiar por la propia semilla
 
 PARAM$home  <- "~/buckets/b1/"
 # FIN Parametros del script
@@ -407,7 +407,6 @@ if( PARAM$lag1 )
   GrabarOutput()
 }
 
-
 if( PARAM$lag2 )
 {
   #creo los campos lags de orden 2
@@ -425,7 +424,6 @@ if( PARAM$lag2 )
   OUTPUT$lag2$ncol_despues  <- ncol(dataset)
   GrabarOutput()
 }
-
 
 if( PARAM$lag3 )
 {
@@ -445,6 +443,16 @@ if( PARAM$lag3 )
   GrabarOutput()
 }
 
+if( PARAM$CanaritosAsesinos$ratio > 0.0)
+{
+  OUTPUT$CanaritosAsesinos$ncol_antes  <- ncol(dataset)
+  CanaritosAsesinos( canaritos_ratio= PARAM$CanaritosAsesinos$ratio,
+                     canaritos_desvios= PARAM$CanaritosAsesinos$desvios,
+                     canaritos_semilla=  PARAM$CanaritosAsesinos$semilla )
+  
+  OUTPUT$CanaritosAsesinos$ncol_despues  <- ncol(dataset)
+  GrabarOutput()
+}
 
 #--------------------------------------
 #agrego las tendencias
@@ -470,13 +478,12 @@ if( PARAM$Tendencias1$run )
   GrabarOutput()
 }
 
-
 if( PARAM$Tendencias2$run )
 {
   OUTPUT$TendenciasYmuchomas2$ncol_antes  <- ncol(dataset)
   TendenciaYmuchomas( dataset,
                       cols= cols_lagueables,
-                      ventana=   PARAM$Tendencias2$ventana,      # 6 meses de historia
+                      ventana=   PARAM$Tendencias2$ventana,      # 3 meses de historia
                       tendencia= PARAM$Tendencias2$tendencia,
                       minimo=    PARAM$Tendencias2$minimo,
                       maximo=    PARAM$Tendencias2$maximo,
@@ -485,6 +492,17 @@ if( PARAM$Tendencias2$run )
                       ratiomax=  PARAM$Tendencias2$ratiomax  )
 
   OUTPUT$TendenciasYmuchomas2$ncol_despues  <- ncol(dataset)
+  GrabarOutput()
+}
+
+if( PARAM$CanaritosAsesinos$ratio > 0.0)
+{
+  OUTPUT$CanaritosAsesinos$ncol_antes  <- ncol(dataset)
+  CanaritosAsesinos( canaritos_ratio= PARAM$CanaritosAsesinos$ratio,
+                     canaritos_desvios= PARAM$CanaritosAsesinos$desvios,
+                     canaritos_semilla=  PARAM$CanaritosAsesinos$semilla )
+  
+  OUTPUT$CanaritosAsesinos$ncol_despues  <- ncol(dataset)
   GrabarOutput()
 }
 
