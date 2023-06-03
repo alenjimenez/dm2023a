@@ -407,17 +407,6 @@ if( PARAM$lag1 )
   GrabarOutput()
 }
 
-if( PARAM$CanaritosAsesinos$ratio > 0.0)
-{
-  OUTPUT$CanaritosAsesinos$ncol_antes  <- ncol(dataset)
-  CanaritosAsesinos( canaritos_ratio= PARAM$CanaritosAsesinos$ratio,
-                     canaritos_desvios= PARAM$CanaritosAsesinos$desvios,
-                     canaritos_semilla=  PARAM$CanaritosAsesinos$semilla )
-  
-  OUTPUT$CanaritosAsesinos$ncol_despues  <- ncol(dataset)
-  GrabarOutput()
-}
-
 if( PARAM$lag2 )
 {
   #creo los campos lags de orden 2
@@ -436,17 +425,6 @@ if( PARAM$lag2 )
   GrabarOutput()
 }
 
-if( PARAM$CanaritosAsesinos$ratio > 0.0)
-{
-  OUTPUT$CanaritosAsesinos$ncol_antes  <- ncol(dataset)
-  CanaritosAsesinos( canaritos_ratio= PARAM$CanaritosAsesinos$ratio,
-                     canaritos_desvios= PARAM$CanaritosAsesinos$desvios,
-                     canaritos_semilla=  PARAM$CanaritosAsesinos$semilla )
-  
-  OUTPUT$CanaritosAsesinos$ncol_despues  <- ncol(dataset)
-  GrabarOutput()
-}
-
 if( PARAM$lag3 )
 {
   #creo los campos lags de orden 3
@@ -462,17 +440,6 @@ if( PARAM$lag3 )
   }
 
   OUTPUT$lag3$ncol_despues  <- ncol(dataset)
-  GrabarOutput()
-}
-
-if( PARAM$CanaritosAsesinos$ratio > 0.0)
-{
-  OUTPUT$CanaritosAsesinos$ncol_antes  <- ncol(dataset)
-  CanaritosAsesinos( canaritos_ratio= PARAM$CanaritosAsesinos$ratio,
-                     canaritos_desvios= PARAM$CanaritosAsesinos$desvios,
-                     canaritos_semilla=  PARAM$CanaritosAsesinos$semilla )
-  
-  OUTPUT$CanaritosAsesinos$ncol_despues  <- ncol(dataset)
   GrabarOutput()
 }
 
@@ -500,17 +467,6 @@ if( PARAM$Tendencias1$run )
   GrabarOutput()
 }
 
-if( PARAM$CanaritosAsesinos$ratio > 0.0)
-{
-  OUTPUT$CanaritosAsesinos$ncol_antes  <- ncol(dataset)
-  CanaritosAsesinos( canaritos_ratio= PARAM$CanaritosAsesinos$ratio,
-                     canaritos_desvios= PARAM$CanaritosAsesinos$desvios,
-                     canaritos_semilla=  PARAM$CanaritosAsesinos$semilla )
-  
-  OUTPUT$CanaritosAsesinos$ncol_despues  <- ncol(dataset)
-  GrabarOutput()
-}
-
 if( PARAM$Tendencias2$run )
 {
   OUTPUT$TendenciasYmuchomas2$ncol_antes  <- ncol(dataset)
@@ -525,17 +481,6 @@ if( PARAM$Tendencias2$run )
                       ratiomax=  PARAM$Tendencias2$ratiomax  )
 
   OUTPUT$TendenciasYmuchomas2$ncol_despues  <- ncol(dataset)
-  GrabarOutput()
-}
-
-if( PARAM$CanaritosAsesinos$ratio > 0.0)
-{
-  OUTPUT$CanaritosAsesinos$ncol_antes  <- ncol(dataset)
-  CanaritosAsesinos( canaritos_ratio= PARAM$CanaritosAsesinos$ratio,
-                     canaritos_desvios= PARAM$CanaritosAsesinos$desvios,
-                     canaritos_semilla=  PARAM$CanaritosAsesinos$semilla )
-  
-  OUTPUT$CanaritosAsesinos$ncol_despues  <- ncol(dataset)
   GrabarOutput()
 }
 
