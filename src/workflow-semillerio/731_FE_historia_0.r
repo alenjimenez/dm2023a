@@ -436,6 +436,8 @@ if( PARAM$CanaritosAsesinos$ratio > 0.0)
   GrabarOutput()
 }
 
+cols_lagueables  <- intersect( cols_lagueables, colnames(dataset) )
+
 if( PARAM$lag3 )
 {
   #creo los campos lags de orden 3
