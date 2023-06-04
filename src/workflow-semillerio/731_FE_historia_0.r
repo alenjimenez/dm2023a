@@ -425,6 +425,17 @@ if( PARAM$lag2 )
   GrabarOutput()
 }
 
+if( PARAM$CanaritosAsesinos$ratio > 0.0)
+{
+  OUTPUT$CanaritosAsesinos$ncol_antes  <- ncol(dataset)
+  CanaritosAsesinos( canaritos_ratio= PARAM$CanaritosAsesinos$ratio,
+                     canaritos_desvios= PARAM$CanaritosAsesinos$desvios,
+                     canaritos_semilla=  PARAM$CanaritosAsesinos$semilla )
+  
+  OUTPUT$CanaritosAsesinos$ncol_despues  <- ncol(dataset)
+  GrabarOutput()
+}
+
 if( PARAM$lag3 )
 {
   #creo los campos lags de orden 3
