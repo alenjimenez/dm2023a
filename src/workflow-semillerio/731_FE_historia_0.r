@@ -56,7 +56,7 @@ PARAM$RandomForest$min.node.size  <- 750
 PARAM$RandomForest$mtry  <- 10
 PARAM$RandomForest$semilla  <- 100043    # cambiar por la propia semilla
 
-PARAM$CanaritosAsesinos$ratio  <- 0.5        #varia de 0.0 a 2.0, si es 0.0 NO se activan
+PARAM$CanaritosAsesinos$ratio  <- 0.75        #varia de 0.0 a 2.0, si es 0.0 NO se activan
 PARAM$CanaritosAsesinos$desvios  <- 4.0      #desvios estandar de la media, para el cutoff
 PARAM$CanaritosAsesinos$semilla  <- 100043   # cambiar por la propia semilla
 
